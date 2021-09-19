@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+{% block title %}Edit Task{% endblock %}
+
+
+{% block body %}
+      {% if user.is_authenticated and user.id == task_creator %}
+
+          <div class="my-3 p-3  rounded box-shadow" style="background-color:#F0F0F0;">
+              <h5 class="border-bottom border-gray pb-2 mb-0">Edit task...</h5>
+
+               <form method="post" class="position: relative;">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Edit task</button>
+              </form>
+          </div>
+          </br></br></br></br></br></br></br></br>
+      {% else %}
+        <div class="my-3 p-3  rounded box-shadow" style="background-color:#F0F0F0;">
+              <h5 class="border-bottom border-gray pb-2 mb-0">Want to edit this task?</h5>
+                Login as a correct user
+          </div>
+      {% endif %}
+
+{% endblock %}

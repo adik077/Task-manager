@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="adrian">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/offcanvas/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f29e29d3e8.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </head>
+
+<body class="bg-light" style=" background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg'); background-size: cover;" >
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'list_tasks' %}">Task manager</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="d-flex">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav" >
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+              <a class="nav-link active" aria-current="page" href="{% url 'update_profile' %}" >Update profile</a>
+            {% endif %}
+          </li>
+          <li class="nav-item">
+            {% if user.is_authenticated %}
+              <a class="nav-link active" aria-current="page" href="{% url 'logout' %}" >Logout</a>
+            {% endif %}
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main role="main" class="container">
+      <div class="d-flex align-items-center p-3 my-3 text-white-50 rounded box-shadow" style="background-color:#4C5D8A ">
+        <div class="card " style="width: 3rem; height:3rem;background-color:#4C5D8A; color:white;display: flex;justify-content: center;align-items: center; border-radius: 15%; border-color:white">
+                {% if user.is_authenticated %}
+                    <div class="card-body">
+                            <h1>{{user.username|first|title}}</h1>
+                    </div>
+                {% else %}
+                    <div class="card-body">
+                            <h1>...</h1>
+                    </div>
+                {% endif %}
+        </div>
+        <div class="lh-100">
+            {% if user.is_authenticated %}
+                <h6 class="mb-0 text-white lh-100">&nbsp Hi {{ user.username|title }},</h6>
+            {% else %}
+                <h6 class="mb-0 text-white lh-100">&nbsp Hi,</h6>
+            {% endif %}
+          <small>&nbsp Let's plan some work today...</small>
+        </div>
+      </div>
+
+
+  {% block body %}
+
+{% endblock %}
+</main>>
+</body>
+</html>
