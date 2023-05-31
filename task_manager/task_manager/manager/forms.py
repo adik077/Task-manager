@@ -1,6 +1,6 @@
 from django import forms
 from .models import Task
-from bootstrap_datepicker_plus import DateTimePickerInput
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 
 class TaskForm(forms.ModelForm):
     deadline = forms.DateTimeField(label='',widget=DateTimePickerInput(attrs={'class': 'form-control','placeholder':'Deadline'}))
